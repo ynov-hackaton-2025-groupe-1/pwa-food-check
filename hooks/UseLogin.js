@@ -1,8 +1,12 @@
 import { useState } from 'react';
+import { Platform } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 export default function UseLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
 
   const handleLogin = async () => {
     try {
@@ -25,6 +29,7 @@ export default function UseLogin() {
           await AsyncStorage.setItem('jwt', data.token);
         }
         console.log('JWT stored successfully');
+        navigation.navigate('Home');
       } else {
         console.log('Login failed');
       }
