@@ -2,16 +2,8 @@ import { useContext } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import ProfileForm from '../components/ProfileForm';
-import { AuthContext } from '../context/AuthContext';
 
 export default function ProfileScreen({ navigation }) {
-  const { logout } = useContext(AuthContext);
-
-  const handleLogout = () => {
-    logout();
-    navigation.navigate('Login');
-  };
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Profile Screen</Text>
