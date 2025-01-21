@@ -15,8 +15,6 @@ export default function UseProfile() {
         jwt = await AsyncStorage.getItem("jwt");
         id = await AsyncStorage.getItem("id");
       }
-      console.log("JWT:", jwt);
-      console.log("ID:", id);
 
       if (jwt && id) {
         const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/api/user/${id}`, {
