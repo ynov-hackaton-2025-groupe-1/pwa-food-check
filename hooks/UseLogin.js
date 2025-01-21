@@ -25,8 +25,10 @@ export default function UseLogin() {
       if (data.token) {
         if (Platform.OS === 'web') {
           localStorage.setItem('jwt', data.token);
+          localStorage.setItem('id', data.id);
         } else {
           await AsyncStorage.setItem('jwt', data.token);
+          await AsyncStorage.setItem('id', data.id);
         }
         console.log('JWT stored successfully');
         login(data.token);
