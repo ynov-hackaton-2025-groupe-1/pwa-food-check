@@ -1,10 +1,13 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { enableScreens } from 'react-native-screens';
+import { NavigationContainer } from '@react-navigation/native';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
+import HomeScreen from './screens/HomeScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import HistoryScreen from './screens/HistoryScreen';
 import { AuthContext } from './context/AuthContext';
-import { NavigationContainer } from '@react-navigation/native';
 import NavBar from './components/NavBar';
 
 enableScreens();
@@ -16,9 +19,13 @@ function AppNavigator() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName={isAuthenticated ? "Home" : "Login"}>
         {isAuthenticated ? (
-          <Stack.Screen name="Main" component={NavBar} options={{ headerShown: false }} />
+          <>
+            <Stack.Screen name="Home" component={NavBar} options={{ headerShown: false }} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen name="History" component={HistoryScreen} />
+          </>
         ) : (
           <>
             <Stack.Screen name="Login" component={LoginScreen} />
