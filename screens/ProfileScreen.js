@@ -1,11 +1,43 @@
-import { Button } from "react-native-paper"
-import { Text, View } from "react-native"
+import { useContext } from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import { Button } from 'react-native-paper';
+import ProfileForm from '../components/ProfileForm';
+import { AuthContext } from '../context/AuthContext';
 
-export default function ProfileScreen ({ navigation }) {
+export default function ProfileScreen({ navigation }) {
+  const { logout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logout();
+    navigation.navigate('Login');
+  };
+
   return (
-    <View>
-      <Text>Profile Screen</Text>
-      <Button mode="contained" onPress={() => navigation.navigate('Home')}>Go to Home</Button>
+    <View style={styles.container}>
+      <Text style={styles.title}>Profile Screen</Text>
+      <Button mode="contained" onPress={() => navigation.navigate('Home')} style={styles.button}>
+        Go to Home
+      </Button>
+      <ProfileForm />
+      <Button mode="contained" onPress={handleLogout} style={styles.button}>
+        Logout
+      </Button>
     </View>
-  )
-};
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 16,
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  button: {
+    marginTop: 16,
+  },
+});
